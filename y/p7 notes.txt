@@ -1,0 +1,204 @@
+For this assignment:
+
+# ✅ “Analyze Bitcoin block structure and compute Merkle root”
+
+you only need:
+
+| Tool                                                            | Needed?  |
+| --------------------------------------------------------------- | -------- |
+| [VS Code](https://code.visualstudio.com?utm_source=chatgpt.com) | ✅ Yes    |
+| Python                                                          | ✅ Yes    |
+| Jupyter Notebook                                                | Optional |
+| Remix IDE                                                       | ❌ No     |
+| MetaMask                                                        | ❌ No     |
+| Ganache                                                         | ❌ No     |
+
+---
+
+# 🎯 Best Option for Beginner
+
+I recommend:
+
+# ✅ VS Code + Python
+
+because:
+
+* easy debugging
+* simple execution
+* clean output
+* best for practical exams
+
+---
+
+# 🛠️ Setup Steps
+
+---
+
+# STEP 1 — Install Python
+
+Check installation:
+
+```bash id="mkl1"
+python --version
+```
+
+or
+
+```bash id="mkl2"
+python3 --version
+```
+
+---
+
+# STEP 2 — Install VS Code
+
+Download:
+
+[VS Code Official Website](https://code.visualstudio.com?utm_source=chatgpt.com)
+
+---
+
+# STEP 3 — Install Python Extension in VS Code
+
+Inside VS Code:
+
+* Extensions
+* Search:
+
+```text id="mkl3"
+Python
+```
+
+Install Microsoft Python extension.
+
+---
+
+# STEP 4 — Create Python File
+
+Example:
+
+```text id="mkl4"
+merkle_tree.py
+```
+
+Paste code.
+
+---
+
+# STEP 5 — Run Program
+
+Click:
+
+```text id="mkl5"
+▶ Run
+```
+
+OR terminal:
+
+```bash id="mkl6"
+python merkle_tree.py
+```
+
+---
+
+# 🧠 Alternative Option (Easy for Learning)
+
+You can also use:
+
+# ✅ Jupyter Notebook
+
+especially if:
+
+* teacher uses notebooks
+* you want step-by-step execution
+
+Install:
+
+```bash id="mkl7"
+pip install notebook
+```
+
+Run:
+
+```bash id="mkl8"
+jupyter notebook
+```
+
+---
+
+# 🔥 Which Tool for Which Blockchain Practical?
+
+This is VERY important.
+
+| Practical Type               | Best Tool         |
+| ---------------------------- | ----------------- |
+| Python Blockchain Simulation | VS Code           |
+| Hashing/Merkle Tree          | VS Code           |
+| Wallet Simulation            | VS Code           |
+| Smart Contracts              | Remix IDE         |
+| Ethereum Deployment          | Remix + MetaMask  |
+| Full DApps                   | VS Code + Node.js |
+
+---
+
+# 📌 Your Current Practical Category
+
+This Merkle Tree practical belongs to:
+
+# ✅ Python Blockchain Simulation
+
+So:
+
+* no Ethereum tools needed
+* no blockchain network needed
+* no MetaMask needed
+
+---
+
+# 🧠 Practical Exam Tip
+
+Teachers usually prefer:
+
+* simple Python implementation
+* proper output
+* clear explanation
+
+NOT overly complex setup.
+
+So VS Code is PERFECT.
+
+---
+
+# 🔥 VERY IMPORTANT Viva Understanding
+
+This practical is NOT interacting with real Bitcoin blockchain.
+
+You are:
+✅ simulating Bitcoin concepts using Python.
+
+That’s why Python is enough.
+
+---
+
+# 🎯 Final Recommendation
+
+For your current assignments:
+
+| Assignment          | Tool      |
+| ------------------- | --------- |
+| Blockchain Creation | VS Code   |
+| Verification        | VS Code   |
+| Wallet Simulation   | VS Code   |
+| Double Spending     | VS Code   |
+| Merkle Root         | VS Code   |
+| Smart Contracts     | Remix IDE |
+
+---
+
+You are doing great because now you’re understanding:
+
+* when to use Python
+* when to use Solidity
+* when Ethereum tools are needed
+
+That’s REAL blockchain understanding 🚀

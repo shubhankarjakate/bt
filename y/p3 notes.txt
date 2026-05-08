@@ -1,0 +1,460 @@
+# Practical 3: Generate Public/Private Keys and Simulate a Digital Wallet
+
+This is one of the MOST important blockchain practicals because wallets are the identity system of blockchain.
+
+---
+
+# 1. 🧠 Intuition First
+
+# 📖 Real-World Analogy
+
+Imagine your bank account.
+
+You have:
+
+| Item            | Real World Meaning |
+| --------------- | ------------------ |
+| ATM Card Number | Public Key         |
+| ATM PIN         | Private Key        |
+
+---
+
+# 🔑 Public Key
+
+Like:
+
+* account number
+* shareable address
+* anyone can see/send money
+
+Example:
+
+```text id="4xxvxu"
+"Send money to this account"
+```
+
+---
+
+# 🔐 Private Key
+
+Like:
+
+* ATM PIN
+* password
+* secret ownership proof
+
+Example:
+
+```text id="0q8r4o"
+Only owner knows it
+```
+
+If someone gets your private key:
+❌ your crypto can be stolen
+
+---
+
+# 👛 Digital Wallet
+
+A blockchain wallet stores:
+
+* public key
+* private key
+
+and allows:
+
+* sending crypto
+* receiving crypto
+* signing transactions
+
+---
+
+# 🔥 Main Blockchain Idea
+
+```text id="s5zj9k"
+Public Key = Address
+Private Key = Ownership
+```
+
+---
+
+# 2. ⚙️ Technical Explanation
+
+---
+
+# 🔐 Public-Key Cryptography
+
+Blockchain uses:
+
+# Asymmetric Cryptography
+
+Meaning:
+
+* two different keys
+* mathematically connected
+
+```text id="ydhnj4"
+Private Key  → generates → Public Key
+```
+
+But:
+
+* impossible to reverse practically
+
+---
+
+# 🧱 Key Generation Process
+
+```text id="ul2tf2"
+Private Key
+     ↓
+Elliptic Curve Algorithm
+     ↓
+Public Key
+```
+
+Bitcoin/Ethereum commonly use:
+
+* ECDSA
+* Elliptic Curve Cryptography
+
+---
+
+# 🪙 Wallet Working
+
+When sending crypto:
+
+1. wallet signs transaction using private key
+2. network verifies using public key
+
+This proves:
+✅ real owner initiated transaction
+
+---
+
+# 🔒 Important Security Point
+
+```text id="cpc5wb"
+Never share private key
+```
+
+Public key can be shared safely.
+
+---
+
+# 📘 Exam-Ready Definition
+
+> A digital wallet is a software application that stores public and private cryptographic keys used to send, receive, and manage cryptocurrency transactions securely.
+
+---
+
+# 4. 💻 Practical / Project Relevance
+
+Used in:
+
+* Bitcoin wallets
+* MetaMask
+* Ethereum accounts
+* NFT ownership
+* Crypto exchanges
+* DeFi platforms
+
+Without wallets:
+
+* blockchain ownership impossible
+
+---
+
+# 🔄 Wallet Architecture
+
+```text id="d9kw6v"
+Private Key
+     ↓
+Generate Public Key
+     ↓
+Generate Wallet Address
+```
+
+---
+
+# 👨‍💻 Python Code — Digital Wallet Simulation
+
+First install library:
+
+```bash id="0w8q6t"
+pip install cryptography
+```
+
+---
+
+# ✅ Full Working Code
+
+```python id="jlwmka"
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.backends import default_backend
+
+
+# Generate Private Key
+private_key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048,
+    backend=default_backend()
+)
+
+# Generate Public Key
+public_key = private_key.public_key()
+
+
+# Convert Private Key into readable format
+private_pem = private_key.private_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.NoEncryption()
+)
+
+# Convert Public Key into readable format
+public_pem = public_key.public_bytes(
+    encoding=serialization.Encoding.PEM,
+    format=serialization.PublicFormat.SubjectPublicKeyInfo
+)
+
+
+# Display Keys
+print("PRIVATE KEY:\n")
+print(private_pem.decode())
+
+print("\nPUBLIC KEY:\n")
+print(public_pem.decode())
+```
+
+---
+
+# 🧩 Step-by-Step Code Explanation
+
+---
+
+# 🔹 Import Libraries
+
+```python id="jlwmkb"
+from cryptography.hazmat.primitives.asymmetric import rsa
+```
+
+Used for RSA cryptography.
+
+---
+
+# 🔹 Generate Private Key
+
+```python id="jlwmkc"
+rsa.generate_private_key()
+```
+
+Creates secret private key.
+
+---
+
+# 🔹 Public Exponent
+
+```python id="jlwmkd"
+65537
+```
+
+Common standard secure value in RSA.
+
+---
+
+# 🔹 Key Size
+
+```python id="jlwmke"
+2048
+```
+
+Means:
+
+* stronger security
+* harder to crack
+
+---
+
+# 🔹 Generate Public Key
+
+```python id="jlwmkf"
+private_key.public_key()
+```
+
+Public key derived from private key.
+
+---
+
+# 🔹 Convert into PEM Format
+
+PEM is readable text format for keys.
+
+Example:
+
+```text id="jlwmkg"
+-----BEGIN PUBLIC KEY-----
+```
+
+---
+
+# 🧪 Expected Output
+
+```text id="jlwmkh"
+PRIVATE KEY:
+
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkq...
+```
+
+```text id="jlwmki"
+PUBLIC KEY:
+
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqh...
+```
+
+---
+
+# 🔥 IMPORTANT UNDERSTANDING
+
+Your wallet is basically:
+
+```text id="jlwmkj"
+Wallet = Key Pair
+```
+
+---
+
+# 🧠 Memory Trick
+
+```text id="jlwmkk"
+Public = Share
+Private = Secret
+```
+
+---
+
+# 🔥 VERY IMPORTANT BLOCKCHAIN CONCEPT
+
+| Key Type    | Can Share? | Purpose           |
+| ----------- | ---------- | ----------------- |
+| Public Key  | YES        | Receive crypto    |
+| Private Key | NO         | Sign transactions |
+
+---
+
+# 🎤 Viva Questions & Answers
+
+---
+
+## Q1. What is digital wallet?
+
+> A digital wallet stores cryptographic keys used for blockchain transactions.
+
+---
+
+## Q2. Difference between public and private key?
+
+| Public Key          | Private Key      |
+| ------------------- | ---------------- |
+| Shared openly       | Kept secret      |
+| Used for receiving  | Used for signing |
+| Like account number | Like password    |
+
+---
+
+## Q3. Why private key is important?
+
+> It proves ownership of cryptocurrency.
+
+---
+
+## Q4. Can public key derive private key?
+
+> Practically impossible due to cryptographic security.
+
+---
+
+## Q5. What happens if private key is leaked?
+
+> Funds can be stolen.
+
+---
+
+## Q6. What cryptography is used in blockchain?
+
+> Asymmetric cryptography.
+
+---
+
+## Q7. What is RSA?
+
+> RSA is a public-key cryptographic algorithm used for secure communication.
+
+---
+
+# 📊 Exam-Oriented Comparison
+
+| Feature          | Symmetric | Asymmetric |
+| ---------------- | --------- | ---------- |
+| Keys Used        | One       | Two        |
+| Speed            | Faster    | Slower     |
+| Security         | Lower     | Higher     |
+| Blockchain Usage | Rare      | Common     |
+
+---
+
+# 🔥 Important Blockchain Reality
+
+Actual Bitcoin/Ethereum wallets mostly use:
+
+* ECDSA
+* Elliptic Curve Cryptography
+
+NOT RSA.
+
+But universities often use RSA for learning simplicity.
+
+---
+
+# 🚀 Mini Enhancement Ideas
+
+You can extend this project by:
+
+* transaction signing
+* wallet address generation
+* blockchain transaction verification
+* mini crypto wallet app
+* QR code wallet
+* Flask wallet API
+
+---
+
+# 🎯 Final Understanding
+
+This practical teaches:
+
+```text id="jlwmkl"
+Ownership + Authentication + Security
+```
+
+This is the foundation of:
+
+* cryptocurrency
+* NFTs
+* DeFi
+* smart contracts
+
+---
+
+# 🔥 SUPER IMPORTANT VIVA LINE
+
+> “In blockchain, cryptocurrency is not stored inside wallet. Wallet only stores cryptographic keys.”
+
+Teachers LOVE this answer.
+
+---
+
+Send the next practical 🚀

@@ -1,0 +1,428 @@
+# 🧠 Short Answer
+
+No — for this practical, you do NOT need another app.
+✅ VS Code + Python is fully enough.
+
+You can easily simulate:
+
+* wallets
+* transactions
+* balances
+* double spending prevention
+
+using only Python.
+
+---
+
+# 🧠 Intuition First
+
+---
+
+# 💸 What is Double Spending?
+
+Imagine you have:
+
+```text id="k8t2d4"
+₹100 in wallet
+```
+
+You try:
+
+```text id="yxj1lb"
+Send ₹100 to Alice
+AND
+Send same ₹100 to Bob
+```
+
+using same money twice.
+
+This is called:
+
+# ❌ Double Spending
+
+---
+
+# 🔥 Why Blockchain Solves This?
+
+Blockchain keeps:
+
+* shared transaction records
+* balance verification
+* transaction history
+
+So network checks:
+
+```text id="jlwmkm"
+"Does sender actually have enough balance?"
+```
+
+If NO:
+❌ transaction rejected
+
+---
+
+# ⚙️ Technical Explanation
+
+---
+
+# 🧱 Basic Transaction Flow
+
+```text id="jlwmkn"
+Wallet A
+   ↓
+Create Transaction
+   ↓
+Network Verification
+   ↓
+Balance Check
+   ↓
+Approved / Rejected
+```
+
+---
+
+# 🔍 Double Spending Prevention Logic
+
+Before transaction:
+
+* system checks sender balance
+
+If:
+
+```text id="jlwmko"
+balance < amount
+```
+
+then:
+❌ reject transaction
+
+---
+
+# 📘 Exam-Ready Definition
+
+> Double spending is an attack where the same cryptocurrency is attempted to be spent more than once. Blockchain prevents this using transaction verification and consensus mechanisms.
+
+---
+
+# 💻 Practical Relevance
+
+Real blockchains use:
+
+* transaction verification
+* consensus algorithms
+* distributed ledgers
+
+to prevent:
+
+* fraud
+* duplicate transactions
+* fake balances
+
+---
+
+# 🛠️ Tools Required
+
+| Tool      | Needed?      |
+| --------- | ------------ |
+| VS Code   | ✅ Yes        |
+| Python    | ✅ Yes        |
+| Ganache   | ❌ Not needed |
+| MetaMask  | ❌ Not needed |
+| Remix IDE | ❌ Not needed |
+
+---
+
+# 🚀 Later Advanced Blockchain Apps
+
+These are needed only for advanced Ethereum practicals:
+
+| Tool     | Purpose                   |
+| -------- | ------------------------- |
+| Ganache  | Local Ethereum blockchain |
+| MetaMask | Crypto wallet             |
+| Remix    | Solidity smart contracts  |
+
+But for THIS assignment:
+✅ Python simulation is enough.
+
+---
+
+# 👨‍💻 Full Python Code — Transaction + Double Spending Prevention
+
+```python id="jlwmkp"
+# Wallet Class
+class Wallet:
+
+    def __init__(self, owner, balance):
+
+        self.owner = owner
+        self.balance = balance
+
+    # Send money function
+    def send_money(self, receiver, amount):
+
+        print(f"\n{self.owner} tries to send {amount} coins to {receiver.owner}")
+
+        # Check balance
+        if self.balance >= amount:
+
+            self.balance -= amount
+            receiver.balance += amount
+
+            print("Transaction Successful")
+
+        else:
+
+            print("Transaction Failed: Insufficient Balance")
+
+
+# Create wallets
+wallet_A = Wallet("Alice", 100)
+wallet_B = Wallet("Bob", 50)
+
+# Initial Balances
+print("Initial Balances")
+print("Alice:", wallet_A.balance)
+print("Bob:", wallet_B.balance)
+
+# Valid Transaction
+wallet_A.send_money(wallet_B, 40)
+
+# Balances After Transaction
+print("\nBalances After Transaction")
+print("Alice:", wallet_A.balance)
+print("Bob:", wallet_B.balance)
+
+# Double Spending Attempt
+wallet_A.send_money(wallet_B, 80)
+
+# Final Balances
+print("\nFinal Balances")
+print("Alice:", wallet_A.balance)
+print("Bob:", wallet_B.balance)
+```
+
+---
+
+# 🧩 Step-by-Step Understanding
+
+---
+
+# 🔹 Wallet Class
+
+```python id="分快三1"
+class Wallet:
+```
+
+Represents blockchain wallet.
+
+---
+
+# 🔹 Owner + Balance
+
+```python id="分快三2"
+self.owner
+self.balance
+```
+
+Stores:
+
+* wallet owner
+* available coins
+
+---
+
+# 🔹 Transaction Function
+
+```python id="分快三3"
+send_money()
+```
+
+Simulates crypto transfer.
+
+---
+
+# 🔹 Balance Verification
+
+```python id="分快三4"
+if self.balance >= amount
+```
+
+CORE double-spending prevention logic.
+
+---
+
+# 🔹 Transaction Success
+
+```python id="分快三5"
+self.balance -= amount
+receiver.balance += amount
+```
+
+Updates balances.
+
+---
+
+# 🔹 Transaction Rejection
+
+```python id="分快三6"
+Transaction Failed
+```
+
+Prevents invalid spending.
+
+---
+
+# 🧪 Expected Output
+
+```text id="分快三7"
+Initial Balances
+Alice: 100
+Bob: 50
+```
+
+---
+
+```text id="分快三8"
+Alice tries to send 40 coins to Bob
+Transaction Successful
+```
+
+Balances:
+
+```text id="分快三9"
+Alice: 60
+Bob: 90
+```
+
+---
+
+# 🔥 Double Spending Attempt
+
+Alice now has only 60.
+
+But tries sending 80.
+
+Output:
+
+```text id="分快三10"
+Transaction Failed: Insufficient Balance
+```
+
+---
+
+# 🔥 WHY This Prevents Double Spending?
+
+Because blockchain verifies:
+
+```text id="分快三11"
+Available Balance Before Transaction
+```
+
+Same money cannot be reused.
+
+---
+
+# 🔄 Real Blockchain vs Our Simulation
+
+| Our Python Program   | Real Blockchain          |
+| -------------------- | ------------------------ |
+| Simple balance check | Distributed verification |
+| Single computer      | Thousands of nodes       |
+| No mining            | Consensus algorithms     |
+| Manual transaction   | Signed transactions      |
+
+---
+
+# 🎤 Viva Questions & Answers
+
+---
+
+## Q1. What is double spending?
+
+> Spending same cryptocurrency more than once.
+
+---
+
+## Q2. How blockchain prevents double spending?
+
+> By transaction verification and maintaining shared ledger consistency.
+
+---
+
+## Q3. Why balance check is important?
+
+> To ensure sender has sufficient funds.
+
+---
+
+## Q4. What happens if insufficient balance?
+
+> Transaction gets rejected.
+
+---
+
+## Q5. Which consensus helps prevent double spending in Bitcoin?
+
+> Proof of Work.
+
+---
+
+## Q6. Can double spending happen in centralized banking?
+
+> Usually prevented by centralized databases.
+
+---
+
+# 🧠 Memory Trick
+
+```text id="分快三12"
+Verify Before Accept
+```
+
+That is blockchain transaction rule.
+
+---
+
+# 🔥 VERY IMPORTANT Viva Concept
+
+In real blockchain:
+
+```text id="分快三13"
+Nodes collectively verify transactions
+```
+
+not just one computer.
+
+This creates decentralization.
+
+---
+
+# 🚀 Advanced Version (Later)
+
+Later we can improve this practical using:
+
+* digital signatures
+* transaction hashes
+* mining
+* mempool
+* blockchain ledger
+* proof of work
+
+That becomes real mini cryptocurrency project.
+
+---
+
+# 🎯 Final Understanding
+
+This practical teaches:
+
+```text id="分快三14"
+Transaction Validation + Fraud Prevention
+```
+
+which is one of the MAIN reasons blockchain exists.
+
+---
+
+Send next practical 🚀

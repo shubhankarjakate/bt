@@ -1,0 +1,254 @@
+Good! This is a very common beginner error and actually an important viva learning point.
+Your error means:
+
+```text id="3v1onr"
+Block object has no attribute 'calculate_hash'
+```
+
+---
+
+# 1. 🧠 Intuition First
+
+Imagine you bought a mobile phone.
+
+But inside the phone,
+the “Camera” feature is missing.
+
+Now when you click Camera:
+
+* phone says feature does not exist.
+
+Same here.
+
+Your `Block` object is trying to call:
+
+```python
+self.calculate_hash()
+```
+
+But Python cannot find that function inside class.
+
+---
+
+# ⚙️ Why This Error Happens
+
+Usually one of these happened:
+
+| Reason                               | Meaning                        |
+| ------------------------------------ | ------------------------------ |
+| Function not written                 | `calculate_hash()` missing     |
+| Indentation wrong                    | Function written outside class |
+| Typo in function name                | Name mismatch                  |
+| Cell execution order wrong (Jupyter) | Old class still loaded         |
+
+---
+
+# ✅ Most Likely Problem = Indentation
+
+Your `calculate_hash()` function is probably outside the `Block` class.
+
+---
+
+# ✅ Correct Code (FULL WORKING VERSION)
+
+Copy this entire code freshly and run it.
+
+```python id="t6e73w"
+import hashlib
+import datetime
+
+
+# Block Class
+class Block:
+
+    def __init__(self, index, data, previous_hash):
+
+        self.index = index
+        self.timestamp = str(datetime.datetime.now())
+        self.data = data
+        self.previous_hash = previous_hash
+
+        # Generate hash
+        self.hash = self.calculate_hash()
+
+    # Function to calculate hash
+    def calculate_hash(self):
+
+        block_data = (
+            str(self.index) +
+            self.timestamp +
+            self.data +
+            self.previous_hash
+        )
+
+        return hashlib.sha256(block_data.encode()).hexdigest()
+
+
+# Blockchain Class
+class Blockchain:
+
+    def __init__(self):
+
+        self.chain = [self.create_genesis_block()]
+
+    # Create first block
+    def create_genesis_block(self):
+
+        return Block(0, "Genesis Block", "0")
+
+    # Get latest block
+    def get_latest_block(self):
+
+        return self.chain[-1]
+
+    # Add new block
+    def add_block(self, data):
+
+        previous_block = self.get_latest_block()
+
+        new_block = Block(
+            len(self.chain),
+            data,
+            previous_block.hash
+        )
+
+        self.chain.append(new_block)
+
+
+# Create blockchain object
+my_blockchain = Blockchain()
+
+# Add blocks
+my_blockchain.add_block("Alice sends 10 BTC to Bob")
+my_blockchain.add_block("Bob sends 5 BTC to Charlie")
+my_blockchain.add_block("Charlie sends 2 BTC to David")
+
+# Print blockchain
+for block in my_blockchain.chain:
+
+    print("\n---------------------")
+    print("Block Index:", block.index)
+    print("Timestamp:", block.timestamp)
+    print("Data:", block.data)
+    print("Previous Hash:", block.previous_hash)
+    print("Hash:", block.hash)
+```
+
+---
+
+# 🔍 VERY IMPORTANT — Check Indentation
+
+Python depends heavily on indentation.
+
+This:
+
+```python id="4d3vlh"
+class Block:
+```
+
+Everything inside class MUST be indented.
+
+Example:
+
+```python id="n4n3zf"
+class Block:
+
+    def calculate_hash(self):
+```
+
+Notice spaces before `def`.
+
+---
+
+# 🧪 Expected Output
+
+```text id="r9msp6"
+---------------------
+Block Index: 0
+Data: Genesis Block
+
+---------------------
+Block Index: 1
+Data: Alice sends 10 BTC to Bob
+```
+
+Hashes will appear long random strings.
+
+---
+
+# 🧠 Jupyter Notebook Important Tip
+
+Sometimes notebook keeps old class version in memory.
+
+## Solution:
+
+Run:
+
+```python id="e35ivw"
+Kernel → Restart Kernel → Run All
+```
+
+OR restart notebook runtime.
+
+This is VERY common in practical exams.
+
+---
+
+# 🎤 Viva Questions from This Error
+
+---
+
+## Q1. Why indentation is important in Python?
+
+> Python uses indentation to define blocks of code instead of braces.
+
+---
+
+## Q2. What is a method in class?
+
+> A method is a function defined inside a class.
+
+---
+
+## Q3. What does self mean in Python?
+
+> `self` refers to current object instance.
+
+---
+
+## Q4. Why do we use calculate_hash()?
+
+> To generate secure SHA-256 hash for each block.
+
+---
+
+# 🔥 Mini Internal Understanding
+
+This line:
+
+```python id="5m7lrn"
+self.hash = self.calculate_hash()
+```
+
+means:
+
+```text id="f3h5s0"
+Create hash immediately when block is created
+```
+
+So every block automatically gets its unique fingerprint.
+
+---
+
+# 📌 Important Beginner Rule
+
+In Python:
+
+```text id="e9k8yu"
+Wrong indentation = Wrong program
+```
+
+---
+
+Now try running the corrected code.
+If another error appears, send screenshot/code and we’ll debug it together like real blockchain developers.
